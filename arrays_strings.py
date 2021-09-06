@@ -90,4 +90,41 @@ def isStringPalindromePermutation(base_string, compare_string):
 
     return False
 
-print(isStringPalindromePermutation('taco cat', 'atco cta'))
+def isOneAwayReplace(s1, s2):
+    oneAway = 0
+    for i in range(len(s1)):
+        if s1[i] != s2[i]:
+            oneAway += 1
+        if oneAway > 1:
+            return False
+    return True
+
+def oneAwayInsertDelete(s1, s2):
+    ind1, ind2 = 0, 0
+    buffer = False
+
+    while (ind1 < len(s1) and ind2 < len(s2)):
+        if (s1[ind1] == s2[ind2]):
+            ind1 += 1
+            ind2 += 1
+        elif (s1[ind1] != s2[ind2] and not buffer):
+            ind1 += 1
+        else:
+            return False
+    
+    return True
+
+def oneAwayString(s1, s2):
+    """
+    Two cases:
+    1. Insert/Delete, if the difference in the lengths of the strings is 1
+    2. Replace, if the lengths are same... Need a function to figure 1-step away
+    """
+    if len(s1) == len(s2):
+        return isOneAwayReplace(s1, s2)
+    else:
+        # ensure the first variable has the bigger word...
+        if len(s1) < len(s2):
+            s1, s2 = s2, s1
+        # bigger word is in s1, smaller one is in s2
+        return oneAwayInsertDelete(s1, s2)
