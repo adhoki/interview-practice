@@ -1,7 +1,7 @@
 import sys
 import os
 import numpy as np
-
+import string
 
 def isStringUnique(string, naive=True):
     
@@ -149,7 +149,15 @@ def createZeroMatrix(arr):
 
     return arr
 
+def isStringRotation(string, rotation):
+    if len(string) != len(rotation):
+        return False
+    
+    string_concatenated = string + string
+    if rotation in string_concatenated:
+        return True
+
+    return False
+
 # np.random.seed(2)
 # arr = np.random.randint(0, 5, size=(4, 4))
-
-# createZeroMatrix(arr)
