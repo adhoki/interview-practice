@@ -1,5 +1,7 @@
 import sys
 import os
+import numpy as np
+
 
 def isStringUnique(string, naive=True):
     
@@ -128,3 +130,26 @@ def oneAwayString(s1, s2):
             s1, s2 = s2, s1
         # bigger word is in s1, smaller one is in s2
         return oneAwayInsertDelete(s1, s2)
+
+def createZeroMatrix(arr):
+    """
+    Input is a MxN matrix which has some elements as 0. 
+    All rows and columns containing 0 in the original matrix to be converted to 0's
+
+    Algorithm:
+    - get set of row and column indexes, and then in the end, only make these rows and columns zero
+    """
+    indices = np.argwhere(arr == 0)
+    x_s, y_s = set(indices[:, 0]), set(indices[:, 1])
+
+    for i in x_s:
+        arr[i, :] = 0
+    for j in y_s:
+        arr[:, j] = 0
+
+    return arr
+
+# np.random.seed(2)
+# arr = np.random.randint(0, 5, size=(4, 4))
+
+# createZeroMatrix(arr)
